@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^$ index.php
+RewriteRule ^pictures(/)?$ index.php?act=pictures
+#RewriteRule ^pictures(/)?$ index.php?act=pictures [NC,QSA]

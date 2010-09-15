@@ -7,7 +7,7 @@ MyApp.PictureManagerPanel = Ext.extend(Ext.Window, {
 	x : 30,
 	y : 30,
 	closable : true,
-	plain : true,
+	//plain : true,
 	layout : 'border',
 	initComponent : function() {
 		MyApp.PictureManagerPanel.superclass.initComponent.call(this);

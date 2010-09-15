@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css" />
 		<script type="text/javascript" src="../extjs/adapter/ext/ext-base-debug.js"></script>
 		<script type="text/javascript" src="../extjs/ext-all-debug.js"></script>
+		<link rel="stylesheet" type="text/css" href="./public/css/chooser.css" />
 		<script type="text/javascript" src="./public/js/MyApp/PictureManagerPanel.js"></script>
 		<script type="text/javascript" src="./public/js/MyApp/PictureManagerTabPanel.js"></script>
 		<script type="text/javascript" src="./public/js/MyApp/PictureStore.js"></script>
@@ -20,26 +21,45 @@
 					'<tpl for=".">',
 						'<div class="thumb-wrap" id="{name}">',
 							'<div class="thumb">',
-								'<img src="{path}" alt="{name}" title="{name}">',
+								'<img src="{url}" alt="{name}" width="100px" height="100px" />',
 							'</div>',
 							'<span>{name}</span>',
-						'<div>',
+							'<div>',
+								'<label for="{name}">Удалить</label>',
+								'<input type="checkbox" name="{name}" id="{name}" />',
+							'</div>',
+						'</div>',
 					'</tpl>'
 				);
 				
 				var storage = new MyApp.PictureStore({
-					url : 'http://oxee/oxeeimagemanager/pictures/'
+					url : 'http://oxee/oxeeimagemanager/pictures',
+					totalProperty : 'rowsCount',
+					root : 'images',
+					fields : [{
+						name : 'name'
+					},{
+						name : 'url'
+					}],
+					idProperty : 'name'
 				});
+				//storage.load();
 				
 				var data = new MyApp.PictureDataView({
 					store : storage,
-					tpl : preview
+					tpl : preview,
+					layout : 'fit',
+					overClass : 'x-view-over',
+					emptyText : 'No images to display',
+					itemSelector : 'div.thumb-wrap'
 				});
 				
 				var formPanel = new MyApp.PictureFormPanel({
+					id : 'images-view',
 					items : data,
 					layout : 'fit',
-					autoHeight : true
+					//autoHeight : true,
+					autoScroll : true
 				});
 			
 				var tabs = new MyApp.PictureManagerTabPanel({

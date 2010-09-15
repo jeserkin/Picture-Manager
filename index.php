@@ -65,16 +65,34 @@ if(isset($_REQUEST['act']) && ($_REQUEST['act'] == 'pictures')) {
 	foreach($dirIter as $file) {
 		if($file->isDot()) continue;
 		$tmp = explode('.', $file->getFilename());
-		$pics['images'][] = array('name' => $tmp[0], 'url' => 'application/upload/'.$file->getFilename());
+		$pics['images'][] = array('name' => (strlen($file->getBasename($tmp[count($tmp)-1])) <= 15) ? $file->getBasename($tmp[count($tmp)-1]) : substr($file->getBasename($tmp[count($tmp)-1]), 0, 15).'...', 'url' => 'application/upload/'.$file->getFilename());
 	}
 	
 	$pics['success'] = true;
 	$pics['rowsCount'] = count($pics['images']);
 	
 	echo json_encode($pics);
+
+/* } else if(isset($_REQUEST['act']) && ($_REQUEST['act'] == 'pictures_temp')) {
+	
+	$pics = array();
+	$pics['images'] = array();
+	
+	$dirIter = new DirectoryIterator(realpath(APPPATH.'/upload/'));
+	
+	foreach($dirIter as $file) {
+		if($file->isDot()) continue;
+		$tmp = explode('.', $file->getFilename());
+		$pics['images'][] = array('name' => (strlen($file->getBasename($tmp[count($tmp)-1])) <= 15) ? $file->getBasename($tmp[count($tmp)-1]) : substr($file->getBasename($tmp[count($tmp)-1]), 0, 15).'...', 'url' => 'application/upload/'.$file->getFilename());
+	}
+	
+	$pics['success'] = true;
+	$pics['rowsCount'] = count($pics['images']);
+	
+	echo json_encode($pics); */
 	
 } else {
 
 	require_once(realpath(APPPATH.'/pages/main'.EXT));
-	
+	#require_once(realpath(APPPATH.'/pages/temp'.EXT));
 }

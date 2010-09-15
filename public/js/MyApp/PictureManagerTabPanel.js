@@ -8,7 +8,6 @@ var sampleText3 = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Inte
 
 MyApp.PictureManagerTabPanel = Ext.extend(Ext.TabPanel, {
 	region : 'center',
-	//margins : '3 3 3 3',
 	padding : 5,
 	activeTab : 0,
 	initComponent : function() {

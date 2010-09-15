@@ -25,8 +25,16 @@
 							'</div>',
 							'<span>{name}</span>',
 							'<div>',
-								'<label for="{name}">Удалить</label>',
-								'<input type="checkbox" name="{name}" id="{name}" />',
+								'<label for="{name}" style="margin-right: 15px;">Удалить</label>',
+								'<input type="checkbox" name="{name}" id="{name}" style="margin: 3px 0 0 3px;" value="on" />',
+							'</div>',
+							'<div>',
+								'<label for="{name}" style="margin-right: 2px;">В листинге</label>',
+								'<input type="checkbox" name="{name}" id="{name}" style="margin: 3px 0 0 3px;" value="on" />',
+							'</div>',
+							'<div>',
+								'<label for="{name}" style="margin-right: 15px;">Главная</label>',
+								'<input type="radio" name="{name}" id="{name}" style="margin: 3px 0 0 3px;" />',
 							'</div>',
 						'</div>',
 					'</tpl>'
@@ -49,7 +57,8 @@
 					store : storage,
 					tpl : preview,
 					layout : 'fit',
-					overClass : 'x-view-over',
+					region : 'center',
+					//overClass : 'x-view-over',
 					emptyText : 'No images to display',
 					itemSelector : 'div.thumb-wrap'
 				});
@@ -57,7 +66,12 @@
 				var formPanel = new MyApp.PictureFormPanel({
 					id : 'images-view',
 					items : data,
-					layout : 'fit',
+					border : false,
+					buttons : [{
+						text : 'Сохранить'
+					},{
+						text : 'Сбросить'
+					}],
 					//autoHeight : true,
 					autoScroll : true
 				});

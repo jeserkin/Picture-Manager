@@ -2,7 +2,7 @@ Ext.ns('MyApp');
 
 MyApp.PictureManagerPanel = Ext.extend(Ext.Window, {
 	title : 'Мэнэджер изображений продуктов',
-	width : 600,
+	width : 750,
 	height : 350,
 	x : 30,
 	y : 30,

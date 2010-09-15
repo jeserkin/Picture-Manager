@@ -29,13 +29,15 @@
 }
 
 #images-view .x-view-over{
-    border:1px solid #dddddd;
-    background: #efefef url(../../resources/images/default/grid/row-over.gif) repeat-x left top;
+    border: 1px solid #dddddd;
+    /* background: #efefef url('../../resources/images/default/grid/row-over.gif') repeat-x left top; */
+	background: #efefef none repeat-x left top;
 	padding: 4px;
 }
 
 #images-view .x-view-selected{
-	background: #eff5fb url(images/selected.gif) no-repeat right bottom;
+	/* background: #eff5fb url('images/selected.gif') no-repeat right bottom; */
+	background: #eff5fb none no-repeat right bottom;
 	border:1px solid #99bbe8;
 	padding: 4px;
 }

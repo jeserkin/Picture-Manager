@@ -61,13 +61,21 @@ if(isset($_REQUEST['act']) && ($_REQUEST['act'] == 'pictures')) {
 	$pics['images'] = array();
 	
 	$dirIter = new DirectoryIterator(realpath(APPPATH.'/upload/'));
+	$i = 1;
 	
 	foreach($dirIter as $file) {
 		if($file->isDot()) continue;
 		$tmp = explode('.', $file->getFilename());
-		$pics['images'][] = array('name' => (strlen($file->getBasename($tmp[count($tmp)-1])) <= 15) ? $file->getBasename($tmp[count($tmp)-1]) : substr($file->getBasename($tmp[count($tmp)-1]), 0, 15).'...', 'url' => 'application/upload/'.$file->getFilename());
+		$pics['images'][] = array(
+			'id' => $i++,
+			'name' => (strlen($file->getBasename($tmp[count($tmp)-1])) <= 15) ? $file->getBasename($tmp[count($tmp)-1]) : substr($file->getBasename($tmp[count($tmp)-1]), 0, 15).'...',
+			'url' => 'application/upload/'.$file->getFilename()
+		);
 	}
 	
+	if(count($pics['images']) == 0) {
+		$pics['images']= array();
+	}
 	$pics['success'] = true;
 	$pics['rowsCount'] = count($pics['images']);
 	

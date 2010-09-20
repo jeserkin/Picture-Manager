@@ -81,23 +81,13 @@ if(isset($_REQUEST['act']) && ($_REQUEST['act'] == 'pictures')) {
 	
 	echo json_encode($pics);
 
-/* } else if(isset($_REQUEST['act']) && ($_REQUEST['act'] == 'pictures_temp')) {
+} else if(isset($_REQUEST['act']) && ($_REQUEST['act'] == 'pictures_temp')) {
 	
-	$pics = array();
-	$pics['images'] = array();
+	// print_r($_POST);
 	
-	$dirIter = new DirectoryIterator(realpath(APPPATH.'/upload/'));
+	$some_array['success'] = true;
 	
-	foreach($dirIter as $file) {
-		if($file->isDot()) continue;
-		$tmp = explode('.', $file->getFilename());
-		$pics['images'][] = array('name' => (strlen($file->getBasename($tmp[count($tmp)-1])) <= 15) ? $file->getBasename($tmp[count($tmp)-1]) : substr($file->getBasename($tmp[count($tmp)-1]), 0, 15).'...', 'url' => 'application/upload/'.$file->getFilename());
-	}
-	
-	$pics['success'] = true;
-	$pics['rowsCount'] = count($pics['images']);
-	
-	echo json_encode($pics); */
+	echo json_encode($some_array);
 	
 } else {
 

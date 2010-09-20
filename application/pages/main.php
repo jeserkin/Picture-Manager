@@ -64,8 +64,8 @@
 				var data = new MyApp.PictureDataView({
 					store : storage,
 					tpl : preview,
-					/* layout : 'fit', */
-					//overClass : 'x-view-over',
+					/* layout : 'fit',
+					overClass : 'x-view-over', */
 					emptyText : 'Изображений не найдено',
 					itemSelector : 'div.thumb'
 				});
@@ -75,10 +75,21 @@
 					items : data,
 					border : false,
 					buttons : [{
-						text : 'Сохранить'
-					},{
-						text : 'Сбросить'
-					}],
+						text : 'Сохранить',
+						handler : function() {
+							formPanel.getForm().submit({
+								url : 'http://oxee/oxeeimagemanager/pictures_temp',
+								//waitMsg : 'Uploading CSV file to server...',
+								success : function(formPanel, o) {
+									/* Ext.get('loader').load({
+										waitMsg : 'Wait please...',
+										url : 'http://oxee/oxeecsv/gengrid/',
+										scripts : true
+									}); */
+								}
+							});
+						}
+					}]
 					//autoHeight : true,
 					//autoScroll : true
 				});
@@ -95,14 +106,26 @@
 					}],
 					border : false,
 					buttons : [{
-						text : 'Загрузить'
+						text : 'Загрузить',
+						handler : function() {
+							formPanelUploadFromLink.getForm().submit({
+								url : 'http://oxee/oxeeimagemanager/pictures_temp',
+								success : function(formPanelUploadFromLink, o) {
+									tabs.setActiveTab(0);
+								}
+							});
+						}
 					},{
-						text : 'Сбросить'
-					}],
+						text : 'Сбросить',
+						handler : function() {
+							formPanelUploadFromLink.getForm().reset();
+						}
+					}]
 					//autoScroll : true
 				});
 				
 				var formPanelUploadFromDevice = new MyApp.PictureFormPanel({// Add Url To Form
+					fileUpload : true,
 					id : 'image-upload-from-device',
 					labelWidth : 190,
 					items : [{
@@ -118,10 +141,21 @@
 					}],
 					border : false,
 					buttons : [{
-						text : 'Загрузить'
+						text : 'Загрузить',
+						handler : function() {
+							formPanelUploadFromDevice.getForm().submit({
+								url : 'http://oxee/oxeeimagemanager/pictures_temp',
+								success : function(formPanelUploadFromDevice, o) {
+									tabs.setActiveTab(0);
+								}
+							});
+						}
 					},{
-						text : 'Сбросить'
-					}],
+						text : 'Сбросить',
+						handler : function() {
+							formPanelUploadFromDevice.getForm().reset();
+						}
+					}]
 					//autoScroll : true
 				});
 			
@@ -140,7 +174,7 @@
 				});
 			
 				var win = new MyApp.PictureManagerPanel({
-					items : [ tabs ],
+					items : [ tabs ]
 					//autoScroll : true
 				});
 				win.show();
